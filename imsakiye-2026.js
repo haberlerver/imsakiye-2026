@@ -190,29 +190,44 @@
   sayacGuncelle();
   setInterval(sayacGuncelle,1000);
 
-  /* KONUM (İZİNSİZ – TEK PARÇA) */
-fetch("https://ipapi.co/json/")
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    var city = (d.city || d.region || "İSTANBUL");
+ /* IMSAK KONUM (İZİNSİZ – SAĞLAM) */
+(function(){
 
-    city = city.toUpperCase()
-      .replace("İ","I")
-      .replace("Ş","S")
-      .replace("Ğ","G")
-      .replace("Ü","U")
-      .replace("Ö","O")
-      .replace("Ç","C");
+  function normalizeSehir(s){
+    return s.toUpperCase()
+      .replace("İ","I").replace("İ","I")
+      .replace("Ş","S").replace("Ğ","G")
+      .replace("Ü","U").replace("Ö","O")
+      .replace("Ç","C")
+      .replace("Â","A")
+      .replace("KAHRAMANMARAS","K.MARAS")
+      .replace("SANLIURFA","SANLIURFA")
+      .replace("AFYONKARAHISAR","AFYON")
+      .replace("KIRIKKALE","KIRIKKALE");
+  }
 
-    if (!D[city]) city = "İSTANBUL";
+  fetch("https://ipapi.co/json/")
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var city =
+        d.city ||
+        d.region ||
+        "ISTANBUL";
 
-    vakitleriGoster(city);
-    sayacGuncelle();
-  })
-  .catch(function(){
-    vakitleriGoster("İSTANBUL");
-    sayacGuncelle();
-  });
+      city = normalizeSehir(city);
 
+      if(!D[city]){
+        console.warn("Şehir eşleşmedi:", city);
+        city = "ISTANBUL";
+      }
+
+      vakitleriGoster(city);
+      sayacGuncelle();
+    })
+    .catch(function(){
+      vakitleriGoster("ISTANBUL");
+      sayacGuncelle();
+    });
 
 })();
+
