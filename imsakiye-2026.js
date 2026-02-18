@@ -2,6 +2,7 @@
 
   /* CSS */
   var css = `
+    /* GENEL AYARLAR */
     #imsak-portal-root {
       --ip-bg:#fff;
       --ip-border:#e4e6eb;
@@ -9,12 +10,11 @@
       --ip-text-sec:#65676b;
       --ip-green:#145a32;
       --ip-iftar:#eb0000;
-      /* Masaüstünde kaybolmaması için güvenli sınır */
-      max-width: 1200px; 
-      margin: 10px auto; 
-      width: 96%; 
       font-family:'Segoe UI',Tahoma,sans-serif;
+      margin: 10px auto;
       display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
     }
     body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
     
@@ -25,101 +25,76 @@
       overflow:hidden;
       box-shadow:0 2px 12px rgba(0,0,0,.1);
     }
-    
-    .imsak-baslik-serit {
-      background:var(--ip-green);
-      color:#fff;
-      text-align:center;
-      padding:10px 12px;
-      font-weight:800;
-      font-size:14px;
-      letter-spacing:1px
+
+    /* --- MASAÜSTÜ TASARIMI (Ekran 601px'den büyükse) --- */
+    @media (min-width: 601px) {
+      #imsak-portal-root {
+        width: 100%;
+        max-width: 1000px; /* Masaüstünde genişlik sınırı */
+      }
+      .imsak-countdown-timer {
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: 6px;
+      }
+      .imsak-countdown-wrap {
+        padding: 40px 20px;
+      }
+      .imsak-vakitler {
+        padding: 20px 10px;
+      }
+      .imsak-val {
+        font-size: 20px;
+      }
+      .imsak-label {
+        font-size: 12px;
+      }
     }
-    
-    .imsak-sehir-bilgi {
-      padding:8px 15px;
-      background:#f4f4f4;
-      border-bottom:1px solid var(--ip-border);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:12px;
-      font-weight:700;
-      color:var(--ip-green)
+
+    /* --- MOBİL TASARIMI (Ekran 600px ve altıysa - Senin Orijinal Ayarların) --- */
+    @media (max-width: 600px) {
+      #imsak-portal-root {
+        width: 98%;
+        max-width: 600px;
+      }
+      .imsak-countdown-timer {
+        font-size: 42px;
+        letter-spacing: 4px;
+      }
+      .imsak-countdown-wrap {
+        padding: 14px 12px;
+      }
+      .imsak-vakitler {
+        padding: 10px 8px;
+      }
+      .imsak-val {
+        font-size: 13px;
+      }
+      .imsak-label {
+        font-size: 9px;
+      }
     }
+
+    /* ORTAK STİLLER */
+    .imsak-baslik-serit {background:var(--ip-green);color:#fff;text-align:center;padding:8px 12px;font-weight:800;font-size:13px;letter-spacing:1px}
+    .imsak-sehir-bilgi {padding:5px 12px;background:#f4f4f4;border-bottom:1px solid var(--ip-border);display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ip-green)}
     body.dark .imsak-sehir-bilgi{background:#111827;color:#6ee7a0}
-    
-    .imsak-countdown-wrap {
-      background:linear-gradient(135deg,#0d3d22,#145a32);
-      padding:30px 12px;
-      text-align:center;
-      transition:background .5s
-    }
-    
-    .imsak-countdown-label {
-      color:#a7f3d0;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      margin-bottom:8px
-    }
-    
-    .imsak-countdown-timer {
-      color:#fff;
-      font-size:52px;
-      font-weight:900;
-      letter-spacing:4px;
-      line-height:1;
-      font-variant-numeric:tabular-nums;
-      text-shadow:0 2px 8px rgba(0,0,0,.3)
-    }
-    
+    .imsak-countdown-wrap {background:linear-gradient(135deg,#0d3d22,#145a32);text-align:center;transition:background .5s}
+    .imsak-countdown-label {color:#a7f3d0;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+    .imsak-countdown-timer {color:#fff;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 2px 8px rgba(0,0,0,.3)}
     .imsak-countdown-timer .cd-sep{color:#6ee7a0;animation:ib 1s step-start infinite}
     @keyframes ib{50%{opacity:0}}
-    
-    .imsak-countdown-sub{color:#6ee7a0;font-size:11px;margin-top:8px;font-weight:600;letter-spacing:1px}
-    
+    .imsak-countdown-sub{color:#6ee7a0;font-size:10px;margin-top:5px;font-weight:600;letter-spacing:1px}
     .imsak-countdown-iftar{background:linear-gradient(135deg,#7f0000,#b91c1c) !important}
-    .imsak-countdown-iftar .imsak-countdown-label{color:#fca5a5}
-    .imsak-countdown-iftar .imsak-countdown-sub{color:#fca5a5}
-    .imsak-countdown-iftar .imsak-countdown-timer .cd-sep{color:#fca5a5}
-    
+    .imsak-countdown-iftar .imsak-countdown-label,.imsak-countdown-iftar .imsak-countdown-sub,.imsak-countdown-iftar .imsak-countdown-timer .cd-sep{color:#fca5a5}
     .imsak-countdown-bitti{background:linear-gradient(135deg,#1e3a5f,#1d4ed8) !important}
-    
-    .imsak-vakitler {
-      display:flex;
-      justify-content:space-between;
-      padding:15px 10px;
-      border-top:1px solid var(--ip-border)
-    }
-    
-    .imsak-item {
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      gap:5px;
-      border-right:1px solid var(--ip-border);
-      padding:0 4px
-    }
+    .imsak-vakitler {display:flex;justify-content:space-between;border-top:1px solid var(--ip-border)}
+    .imsak-item {flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border-right:1px solid var(--ip-border);padding:0 4px}
     .imsak-item:last-child{border-right:none}
-    
-    .imsak-label{font-size:10px;font-weight:800;color:var(--ip-text-sec);letter-spacing:.5px;text-transform:uppercase}
-    .imsak-val{font-size:16px;font-weight:700;color:var(--ip-text)}
-    .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:18px!important}
-    .imsak-imsak-val{color:var(--ip-green)!important;font-size:18px!important}
-
-    /* MOBİL DÜZENLEME (600px ve altı için orijinal haline daralır) */
-    @media(max-width:600px){
-      #imsak-portal-root { max-width: 600px; width: 98%; }
-      .imsak-countdown-timer{font-size:36px;letter-spacing:2px}
-      .imsak-countdown-wrap{padding:14px 12px}
-      .imsak-label{font-size:8px}
-      .imsak-val{font-size:12px}
-      .imsak-iftar-val, .imsak-imsak-val{font-size:13px!important}
-    }
+    .imsak-label{font-weight:800;color:var(--ip-text-sec);letter-spacing:.5px}
+    .imsak-val{font-weight:700;color:var(--ip-text)}
+    .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:1.1em!important}
+    .imsak-imsak-val{color:var(--ip-green)!important;font-size:1.1em!important}
   `;
   
   var st = document.createElement('style');
