@@ -27,8 +27,7 @@
     .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:14px!important}
     .imsak-imsak-val{color:var(--ip-green)!important;font-size:14px!important}
     @media(max-width:480px){.imsak-countdown-timer{font-size:30px;letter-spacing:2px}.imsak-label{font-size:8px}.imsak-val{font-size:11px}.imsak-iftar-val,.imsak-imsak-val{font-size:12px!important}}
-  `;
-  /* === IMSAK WIDGET GERÇEK TAM GENIŞLIK FIX === */
+/* === IMSAK WIDGET GERÇEK TAM GENIŞLIK FIX === */
 #imsak-portal-root{
   width:100vw !important;
   max-width:100vw !important;
@@ -41,6 +40,7 @@ body{
   overflow-x:hidden;
 }
 
+  `;
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
