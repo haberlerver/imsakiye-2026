@@ -186,7 +186,7 @@
   }
 
   /* BAŞLAT */
-  vakitleriGoster('İSTANBUL');
+  // AUTO-LOC DISABLED DEFAULT ISTANBUL
   sayacGuncelle();
   setInterval(sayacGuncelle,1000);
 
@@ -204,69 +204,61 @@
 
 
 
-<!-- IMSAK KONUM OTOMATIK (HAVA DURUMU MANTIGIYLA) -->
-<script type="text/javascript">
+/* ===== OTOMATIK IMSAK KONUM (81 IL – IZINSIZ) ===== */
 (function(){
-
-  const sehirListesi = [
-    {ad:"ADANA",lat:37,lon:35.3213},{ad:"ADIYAMAN",lat:37.7648,lon:38.2786},
-    {ad:"AFYON",lat:38.7569,lon:30.5433},{ad:"AGRI",lat:39.7191,lon:43.0503},
-    {ad:"AMASYA",lat:40.6539,lon:35.8331},{ad:"ANKARA",lat:39.9208,lon:32.8541},
-    {ad:"ANTALYA",lat:36.8969,lon:30.7133},{ad:"ARTVIN",lat:41.1828,lon:41.8183},
-    {ad:"AYDIN",lat:37.845,lon:27.8396},{ad:"BALIKESIR",lat:39.6484,lon:27.8826},
-    {ad:"BILECIK",lat:40.15,lon:29.9833},{ad:"BINGOL",lat:38.8853,lon:40.4983},
-    {ad:"BITLIS",lat:38.4,lon:42.1167},{ad:"BOLU",lat:40.7395,lon:31.6116},
-    {ad:"BURDUR",lat:37.7167,lon:30.2833},{ad:"BURSA",lat:40.1828,lon:29.0669},
-    {ad:"CANAKKALE",lat:40.1467,lon:26.4086},{ad:"CANKIRI",lat:40.6,lon:33.6167},
-    {ad:"CORUM",lat:40.55,lon:34.95},{ad:"DENIZLI",lat:37.7765,lon:29.0864},
-    {ad:"DIYARBAKIR",lat:37.9144,lon:40.2306},{ad:"EDIRNE",lat:41.6772,lon:26.5556},
-    {ad:"ELAZIG",lat:38.681,lon:39.2264},{ad:"ERZINCAN",lat:39.75,lon:39.5},
-    {ad:"ERZURUM",lat:39.9,lon:41.27},{ad:"ESKISEHIR",lat:39.7767,lon:30.5206},
-    {ad:"GAZIANTEP",lat:37.0667,lon:37.3833},{ad:"GIRESUN",lat:40.9128,lon:38.3895},
-    {ad:"GUMUSHANE",lat:40.4603,lon:39.4814},{ad:"HAKKARI",lat:37.5833,lon:43.7333},
-    {ad:"HATAY",lat:36.2028,lon:36.1606},{ad:"ISPARTA",lat:37.7667,lon:30.55},
-    {ad:"MERSIN",lat:36.8,lon:34.6333},{ad:"ISTANBUL",lat:41.0082,lon:28.9784},
-    {ad:"IZMIR",lat:38.4192,lon:27.1287},{ad:"KARS",lat:40.6085,lon:43.0975},
-    {ad:"KASTAMONU",lat:41.3887,lon:33.7827},{ad:"KAYSERI",lat:38.7333,lon:35.4833},
-    {ad:"KIRKLARELI",lat:41.7333,lon:27.2167},{ad:"KIRSEHIR",lat:39.1458,lon:34.1639},
-    {ad:"KOCAELI",lat:40.8533,lon:29.8815},{ad:"KONYA",lat:37.8667,lon:32.4833},
-    {ad:"KUTAHYA",lat:39.4167,lon:29.9833},{ad:"MALATYA",lat:38.3552,lon:38.3095},
-    {ad:"MANISA",lat:38.6191,lon:27.4289},{ad:"K.MARAS",lat:37.5833,lon:36.9333},
-    {ad:"MARDIN",lat:37.3122,lon:40.7351},{ad:"MUGLA",lat:37.2153,lon:28.3636},
-    {ad:"MUS",lat:38.9462,lon:41.7539},{ad:"NEVSEHIR",lat:38.6244,lon:34.7239},
-    {ad:"NIGDE",lat:37.9667,lon:34.6833},{ad:"ORDU",lat:40.9839,lon:37.8764},
-    {ad:"RIZE",lat:41.0201,lon:40.5234},{ad:"SAKARYA",lat:40.7569,lon:30.3781},
-    {ad:"SAMSUN",lat:41.2867,lon:36.33},{ad:"SIIRT",lat:37.9333,lon:41.95},
-    {ad:"SINOP",lat:42.0264,lon:35.1552},{ad:"SIVAS",lat:39.7477,lon:37.0179},
-    {ad:"TEKIRDAG",lat:40.978,lon:27.511},{ad:"TOKAT",lat:40.3167,lon:36.55},
-    {ad:"TRABZON",lat:41,lon:39.7333},{ad:"TUNCELI",lat:39.1072,lon:39.5483},
-    {ad:"SANLIURFA",lat:37.1671,lon:38.7939},{ad:"USAK",lat:38.6823,lon:29.4082},
-    {ad:"VAN",lat:38.4942,lon:43.38},{ad:"YOZGAT",lat:39.82,lon:34.8044},
-    {ad:"ZONGULDAK",lat:41.4564,lon:31.7987},{ad:"AKSARAY",lat:38.3687,lon:34.036},
-    {ad:"BAYBURT",lat:40.2563,lon:40.2229},{ad:"KARAMAN",lat:37.1811,lon:33.215},
-    {ad:"KIRIKKALE",lat:39.85,lon:33.5167},{ad:"BATMAN",lat:37.8874,lon:41.1322},
-    {ad:"SIRNAK",lat:37.5164,lon:42.461},{ad:"BARTIN",lat:41.6358,lon:32.3375},
-    {ad:"ARDAHAN",lat:41.1087,lon:42.7022},{ad:"IGDIR",lat:39.9237,lon:44.045},
-    {ad:"YALOVA",lat:40.65,lon:29.2667},{ad:"KARABUK",lat:41.2,lon:32.6333},
-    {ad:"KILIS",lat:36.7161,lon:37.115},{ad:"OSMANIYE",lat:37.0742,lon:36.2478},
-    {ad:"DUZCE",lat:40.8438,lon:31.1565}
+  const iller = [
+    ["ADANA",37,35.3213],["ADIYAMAN",37.7648,38.2786],["AFYON",38.7569,30.5433],
+    ["AGRI",39.7191,43.0503],["AMASYA",40.6539,35.8331],["ANKARA",39.9208,32.8541],
+    ["ANTALYA",36.8969,30.7133],["ARTVIN",41.1828,41.8183],["AYDIN",37.845,27.8396],
+    ["BALIKESIR",39.6484,27.8826],["BILECIK",40.15,29.9833],["BINGOL",38.8853,40.4983],
+    ["BITLIS",38.4,42.1167],["BOLU",40.7395,31.6116],["BURDUR",37.7167,30.2833],
+    ["BURSA",40.1828,29.0669],["CANAKKALE",40.1467,26.4086],["CANKIRI",40.6,33.6167],
+    ["CORUM",40.55,34.95],["DENIZLI",37.7765,29.0864],["DIYARBAKIR",37.9144,40.2306],
+    ["EDIRNE",41.6772,26.5556],["ELAZIG",38.681,39.2264],["ERZINCAN",39.75,39.5],
+    ["ERZURUM",39.9,41.27],["ESKISEHIR",39.7767,30.5206],["GAZIANTEP",37.0667,37.3833],
+    ["GIRESUN",40.9128,38.3895],["GUMUSHANE",40.4603,39.4814],["HAKKARI",37.5833,43.7333],
+    ["HATAY",36.2028,36.1606],["ISPARTA",37.7667,30.55],["MERSIN",36.8,34.6333],
+    ["ISTANBUL",41.0082,28.9784],["IZMIR",38.4192,27.1287],["KARS",40.6085,43.0975],
+    ["KASTAMONU",41.3887,33.7827],["KAYSERI",38.7333,35.4833],
+    ["KIRKLARELI",41.7333,27.2167],["KIRSEHIR",39.1458,34.1639],
+    ["KOCAELI",40.8533,29.8815],["KONYA",37.8667,32.4833],
+    ["KUTAHYA",39.4167,29.9833],["MALATYA",38.3552,38.3095],
+    ["MANISA",38.6191,27.4289],["K.MARAS",37.5833,36.9333],
+    ["MARDIN",37.3122,40.7351],["MUGLA",37.2153,28.3636],
+    ["MUS",38.9462,41.7539],["NEVSEHIR",38.6244,34.7239],
+    ["NIGDE",37.9667,34.6833],["ORDU",40.9839,37.8764],
+    ["RIZE",41.0201,40.5234],["SAKARYA",40.7569,30.3781],
+    ["SAMSUN",41.2867,36.33],["SIIRT",37.9333,41.95],
+    ["SINOP",42.0264,35.1552],["SIVAS",39.7477,37.0179],
+    ["TEKIRDAG",40.978,27.511],["TOKAT",40.3167,36.55],
+    ["TRABZON",41,39.7333],["TUNCELI",39.1072,39.5483],
+    ["SANLIURFA",37.1671,38.7939],["USAK",38.6823,29.4082],
+    ["VAN",38.4942,43.38],["YOZGAT",39.82,34.8044],
+    ["ZONGULDAK",41.4564,31.7987],["AKSARAY",38.3687,34.036],
+    ["BAYBURT",40.2563,40.2229],["KARAMAN",37.1811,33.215],
+    ["KIRIKKALE",39.85,33.5167],["BATMAN",37.8874,41.1322],
+    ["SIRNAK",37.5164,42.461],["BARTIN",41.6358,32.3375],
+    ["ARDAHAN",41.1087,42.7022],["IGDIR",39.9237,44.045],
+    ["YALOVA",40.65,29.2667],["KARABUK",41.2,32.6333],
+    ["KILIS",36.7161,37.115],["OSMANIYE",37.0742,36.2478],
+    ["DUZCE",40.8438,31.1565]
   ];
 
-  function enYakinSehir(lat,lon){
-    let sec="ISTANBUL", min=1e9;
-    for(let i=0;i<sehirListesi.length;i++){
-      let d=(lat-sehirListesi[i].lat)**2+(lon-sehirListesi[i].lon)**2;
-      if(d<min){min=d;sec=sehirListesi[i].ad;}
+  function yakin(lat,lon){
+    let s="ISTANBUL",m=1e9;
+    for(let i=0;i<iller.length;i++){
+      let d=(lat-iller[i][1])**2+(lon-iller[i][2])**2;
+      if(d<m){m=d;s=iller[i][0];}
     }
-    return sec;
+    return s;
   }
 
   fetch("https://ipwho.is/")
     .then(r=>r.json())
     .then(d=>{
       if(d && d.latitude && d.longitude){
-        let il = enYakinSehir(d.latitude,d.longitude);
-        if(typeof D!=="undefined" && D[il]){
+        let il=yakin(d.latitude,d.longitude);
+        if(window.D && D[il]){
           vakitleriGoster(il);
           sayacGuncelle();
           return;
@@ -279,6 +271,4 @@
       vakitleriGoster("ISTANBUL");
       sayacGuncelle();
     });
-
 })();
-</script>
