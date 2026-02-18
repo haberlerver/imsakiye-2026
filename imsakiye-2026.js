@@ -190,14 +190,29 @@
   sayacGuncelle();
   setInterval(sayacGuncelle,1000);
 
-  /* KONUM */
-  fetch('https://ipapi.co/json/')
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d&&d.latitude&&d.longitude){
-        var il=yakinIl(parseFloat(d.latitude),parseFloat(d.longitude));
-        if(D[il]){vakitleriGoster(il);sayacGuncelle();}
-      }
-    }).catch(function(){});
+  /* KONUM (İZİNSİZ – TEK PARÇA) */
+fetch("https://ipapi.co/json/")
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    var city = (d.city || d.region || "İSTANBUL");
+
+    city = city.toUpperCase()
+      .replace("İ","I")
+      .replace("Ş","S")
+      .replace("Ğ","G")
+      .replace("Ü","U")
+      .replace("Ö","O")
+      .replace("Ç","C");
+
+    if (!D[city]) city = "İSTANBUL";
+
+    vakitleriGoster(city);
+    sayacGuncelle();
+  })
+  .catch(function(){
+    vakitleriGoster("İSTANBUL");
+    sayacGuncelle();
+  });
+
 
 })();
