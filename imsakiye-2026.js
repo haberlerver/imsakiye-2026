@@ -9,10 +9,12 @@
       --ip-text-sec:#65676b;
       --ip-green:#145a32;
       --ip-iftar:#eb0000;
-      /* Masaüstünde tam kaplaması için kısıtlamaları kaldırdık */
-      width: 100%; 
-      margin: 10px 0; 
+      /* Masaüstünde kaybolmaması için güvenli sınır */
+      max-width: 1200px; 
+      margin: 10px auto; 
+      width: 96%; 
       font-family:'Segoe UI',Tahoma,sans-serif;
+      display: block !important;
     }
     body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
     
@@ -22,7 +24,6 @@
       border-radius:12px;
       overflow:hidden;
       box-shadow:0 2px 12px rgba(0,0,0,.1);
-      width: 100%;
     }
     
     .imsak-baslik-serit {
@@ -50,7 +51,7 @@
     
     .imsak-countdown-wrap {
       background:linear-gradient(135deg,#0d3d22,#145a32);
-      padding:25px 12px;
+      padding:30px 12px;
       text-align:center;
       transition:background .5s
     }
@@ -66,7 +67,7 @@
     
     .imsak-countdown-timer {
       color:#fff;
-      font-size:52px; /* Masaüstünde biraz daha belirgin */
+      font-size:52px;
       font-weight:900;
       letter-spacing:4px;
       line-height:1;
@@ -110,15 +111,14 @@
     .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:18px!important}
     .imsak-imsak-val{color:var(--ip-green)!important;font-size:18px!important}
 
-    /* MOBİL DÜZENLEME (480px ve altı için orijinal ayarlarına döner) */
-    @media(max-width:480px){
-      #imsak-portal-root { width: 98%; margin: 10px auto; }
-      .imsak-countdown-timer{font-size:32px;letter-spacing:2px}
+    /* MOBİL DÜZENLEME (600px ve altı için orijinal haline daralır) */
+    @media(max-width:600px){
+      #imsak-portal-root { max-width: 600px; width: 98%; }
+      .imsak-countdown-timer{font-size:36px;letter-spacing:2px}
       .imsak-countdown-wrap{padding:14px 12px}
       .imsak-label{font-size:8px}
-      .imsak-val{font-size:11px}
-      .imsak-iftar-val, .imsak-imsak-val{font-size:12px!important}
-      .imsak-vakitler{padding:10px 8px}
+      .imsak-val{font-size:12px}
+      .imsak-iftar-val, .imsak-imsak-val{font-size:13px!important}
     }
   `;
   
