@@ -163,13 +163,11 @@ body.dark .imsak-sehir-bilgi{
   .imsak-imsak-val{font-size:12px!important}
 }
 
-/* === MASAÜSTÜ GERÇEK TAM GENİŞLİK === */
+/* === MASAÜSTÜ: 600px KİLİDİNİ AÇ === */
 @media(min-width:992px){
   #imsak-portal-root{
-    width:100vw;
-    max-width:100vw;
-    margin-left:calc(-50vw + 50%);
-    margin-right:calc(-50vw + 50%);
+    max-width:100%;
+    width:100%;
   }
 }
 `;
@@ -179,6 +177,7 @@ body.dark .imsak-sehir-bilgi{
   document.head.appendChild(st);
 
 })();
+
 
 
   /* HTML */
