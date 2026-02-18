@@ -103,12 +103,10 @@
     {ad:"TRABZON",lat:41.0,lon:39.73},{ad:"VAN",lat:38.49,lon:43.38}
   ];
 
-  var TE = [
-    "19 Şub Perşembe", "20 Şub Cuma", "21 Şub Cumartesi", "22 Şub Pazar", "23 Şub Pazartesi", "24 Şub Salı", "25 Şub Çarşamba",
-    "26 Şub Perşembe", "27 Şub Cuma", "28 Şub Cumartesi", "01 Mar Pazar", "02 Mar Pazartesi", "03 Mar Salı", "04 Mar Çarşamba",
-    "05 Mar Perşembe", "06 Mar Cuma", "07 Mar Cumartesi", "08 Mar Pazar", "09 Mar Pazartesi", "10 Mar Salı", "11 Mar Çarşamba",
-    "12 Mar Perşembe", "13 Mar Cuma", "14 Mar Cumartesi", "15 Mar Pazar", "16 Mar Pazartesi", "17 Mar Salı ⭐", "18 Mar Çarşamba", "19 Mar Perşembe"
-];
+  var TE = ["19 Şubat Perşembe", "20 Şubat Cuma", "21 Şubat Cumartesi", "22 Şubat Pazar", "23 Şubat Pazartesi", "24 Şubat Salı", "25 Şubat Çarşamba",
+    "26 Şubat Perşembe", "27 Şubat Cuma", "28 Şubat Cumartesi", "01 Mart Pazar", "02 Mart Pazartesi", "03 Mart Salı", "04 Mart Çarşamba",
+    "05 Mart Perşembe", "06 Mart Cuma", "07 Mart Cumartesi", "08 Mart Pazar", "09 Mart Pazartesi", "10 Mart Salı", "11 Mart Çarşamba",
+    "12 Mart Perşembe", "13 Mart Cuma", "14 Mart Cumartesi", "15 Mart Pazar", "16 Mart Pazartesi", "17 Mart Salı ⭐", "18 Mart Çarşamba", "19 Mart Perşembe"];
 
   function gunHesapla() {
   // Türkiye saati için ayarlama (UTC+3)
