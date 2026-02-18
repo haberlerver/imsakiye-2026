@@ -103,10 +103,10 @@
     {ad:"TRABZON",lat:41.0,lon:39.73},{ad:"VAN",lat:38.49,lon:43.38}
   ];
 
-  var TE = ["19 Şubat Perşembe", "20 Şubat Cuma", "21 Şubat Cumartesi", "22 Şubat Pazar", "23 Şubat Pazartesi", "24 Şubat Salı", "25 Şubat Çarşamba",
-    "26 Şubat Perşembe", "27 Şubat Cuma", "28 Şubat Cumartesi", "01 Mart Pazar", "02 Mart Pazartesi", "03 Mart Salı", "04 Mart Çarşamba",
-    "05 Mart Perşembe", "06 Mart Cuma", "07 Mart Cumartesi", "08 Mart Pazar", "09 Mart Pazartesi", "10 Mart Salı", "11 Mart Çarşamba",
-    "12 Mart Perşembe", "13 Mart Cuma", "14 Mart Cumartesi", "15 Mart Pazar", "16 Mart Pazartesi", "17 Mart Salı ⭐", "18 Mart Çarşamba", "19 Mart Perşembe"];
+  var TE = ["19 Şubat Perşembe 2026", "20 Şubat Cuma 2026", "21 Şubat Cumartesi 2026", "22 Şubat Pazar 2026", "23 Şubat Pazartesi 2026", "24 Şubat Salı 2026", "25 Şubat Çarşamba 2026",
+    "26 Şubat Perşembe 2026", "27 Şubat Cuma 2026", "28 Şubat Cumartesi 2026", "01 Mart Pazar 2026", "02 Mart Pazartesi 2026", "03 Mart Salı 2026", "04 Mart Çarşamba 2026",
+    "05 Mart Perşembe 2026", "06 Mart Cuma 2026", "07 Mart Cumartesi 2026", "08 Mart Pazar 2026", "09 Mart Pazartesi 2026", "10 Mart Salı 2026", "11 Mart Çarşamba 2026",
+    "12 Mart Perşembe 2026", "13 Mart Cuma 2026", "14 Mart Cumartesi 2026", "15 Mart Pazar 2026", "16 Mart Pazartesi 2026", "17 Mart Salı 2026 ⭐", "18 Mart Çarşamba 2026", "19 Mart Perşembe 2026"];
 
   function gunHesapla() {
   // Türkiye saati için ayarlama (UTC+3)
