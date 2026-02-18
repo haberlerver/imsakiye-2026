@@ -1,5 +1,4 @@
 (function () {
-
   /* CSS */
   var css = `
     #imsak-portal-root {
@@ -9,9 +8,12 @@
       --ip-text-sec: #65676b;
       --ip-green: #145a32;
       --ip-iftar: #eb0000;
-      /* Masaüstünde tam genişlik, mobilde esnek yapı */
-      width: 100%; 
+      /* Masaüstünde tam genişlik kaplaması için ayarlar */
+      width: 100%;
+      max-width: 100%;
       margin: 10px 0;
+      display: block;
+      clear: both;
       font-family: 'Segoe UI', Tahoma, sans-serif;
     }
     body.dark #imsak-portal-root {
@@ -26,6 +28,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 2px 12px rgba(0,0,0,.1);
+      width: 100%;
     }
     .imsak-baslik-serit {
       background: var(--ip-green);
@@ -47,15 +50,11 @@
       font-weight: 700;
       color: var(--ip-green);
     }
-    body.dark .imsak-sehir-bilgi {
-      background: #111827;
-      color: #6ee7a0;
-    }
+    body.dark .imsak-sehir-bilgi { background: #111827; color: #6ee7a0; }
     .imsak-countdown-wrap {
       background: linear-gradient(135deg, #0d3d22, #145a32);
       padding: 14px 12px 12px;
       text-align: center;
-      transition: background .5s;
     }
     .imsak-countdown-label {
       color: #a7f3d0;
@@ -74,73 +73,36 @@
       font-variant-numeric: tabular-nums;
       text-shadow: 0 2px 8px rgba(0,0,0,.3);
     }
-    .imsak-countdown-timer .cd-sep {
-      color: #6ee7a0;
-      animation: ib 1s step-start infinite;
-    }
-    @keyframes ib {
-      50% { opacity: 0; }
-    }
-    .imsak-countdown-sub {
-      color: #6ee7a0;
-      font-size: 10px;
-      margin-top: 5px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-    .imsak-countdown-iftar {
-      background: linear-gradient(135deg, #7f0000, #b91c1c) !important;
-    }
-    .imsak-countdown-iftar .imsak-countdown-label { color: #fca5a5; }
-    .imsak-countdown-iftar .imsak-countdown-sub { color: #fca5a5; }
-    .imsak-countdown-iftar .imsak-countdown-timer .cd-sep { color: #fca5a5; }
-    .imsak-countdown-bitti {
-      background: linear-gradient(135deg, #1e3a5f, #1d4ed8) !important;
-    }
-    .imsak-vakitler {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 8px;
-      border-top: 1px solid var(--ip-border);
-    }
-    .imsak-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 3px;
-      border-right: 1px solid var(--ip-border);
-      padding: 0 4px;
-    }
+    .imsak-countdown-timer .cd-sep { color: #6ee7a0; animation: ib 1s step-start infinite; }
+    @keyframes ib { 50% { opacity: 0; } }
+    .imsak-countdown-sub { color: #6ee7a0; font-size: 10px; margin-top: 5px; font-weight: 600; }
+    .imsak-countdown-iftar { background: linear-gradient(135deg, #7f0000, #b91c1c) !important; }
+    .imsak-countdown-bitti { background: linear-gradient(135deg, #1e3a5f, #1d4ed8) !important; }
+    .imsak-vakitler { display: flex; justify-content: space-between; padding: 10px 8px; border-top: 1px solid var(--ip-border); }
+    .imsak-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; border-right: 1px solid var(--ip-border); padding: 0 4px; }
     .imsak-item:last-child { border-right: none; }
-    .imsak-label {
-      font-size: 9px;
-      font-weight: 800;
-      color: var(--ip-text-sec);
-      letter-spacing: .5px;
-    }
-    .imsak-val {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ip-text);
-    }
+    .imsak-label { font-size: 9px; font-weight: 800; color: var(--ip-text-sec); }
+    .imsak-val { font-size: 13px; font-weight: 700; color: var(--ip-text); }
     .imsak-iftar-val { color: var(--ip-iftar) !important; font-size: 14px !important; }
     .imsak-imsak-val { color: var(--ip-green) !important; font-size: 14px !important; }
 
-    /* Mobil Düzenlemeler */
+    /* Mobil için eski dar görünümü koruyoruz */
     @media (max-width: 480px) {
-      #imsak-portal-root { width: 98%; margin: 10px auto; }
+      #imsak-portal-root { width: 96%; margin: 10px auto; }
       .imsak-countdown-timer { font-size: 30px; letter-spacing: 2px; }
       .imsak-label { font-size: 8px; }
       .imsak-val { font-size: 11px; }
-      .imsak-iftar-val, .imsak-imsak-val { font-size: 12px !important; }
     }
   `;
-  var st = document.createElement('style');
-  st.textContent = css;
-  document.head.appendChild(st);
 
+  var st = document.createElement('style');
+  st.type = 'text/css';
+  if (st.styleSheet) {
+    st.styleSheet.cssText = css;
+  } else {
+    st.appendChild(document.createTextNode(css));
+  }
+  document.head.appendChild(st);
 })();
 
   /* HTML */
