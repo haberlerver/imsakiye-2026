@@ -110,16 +110,26 @@
     "12 Mar Perşembe", "13 Mar Cuma", "14 Mar Cumartesi", "15 Mar Pazar", "16 Mar Pazartesi", "17 Mar Salı ⭐", "18 Mar Çarşamba", "19 Mar Perşembe"
 ];
 
-  /* GÜN */
   function gunHesapla() {
-    var now = new Date();
-    var tr  = new Date(now.getTime() + 3*60*60*1000);
-    var bas = new Date(Date.UTC(2026,1,19));
-    var bug = new Date(Date.UTC(tr.getUTCFullYear(),tr.getUTCMonth(),tr.getUTCDate()));
-    var g   = Math.floor((bug-bas)/86400000);
-    return Math.min(Math.max(g,0),28);
-  }
-  var gun = gunHesapla();
+  // Türkiye saati için ayarlama (UTC+3)
+  var now = new Date();
+  var tr = new Date(now.getTime() + (3 * 60 * 60 * 1000));
+  
+  // Başlangıç: 19 Şubat 2026 (Ay 1 = Şubat)
+  var bas = new Date(Date.UTC(2026, 1, 19));
+  
+  // Bugünün UTC tarihini al
+  var bug = new Date(Date.UTC(tr.getUTCFullYear(), tr.getUTCMonth(), tr.getUTCDate()));
+  
+  // Milisaniyeyi güne çevir
+  var g = Math.floor((bug - bas) / 86400000);
+  
+  // Dizinin sınırları içinde kal (0 ile 28 arası)
+  return Math.min(Math.max(g, 0), 28);
+}
+
+var gun = gunHesapla();
+// dizi[gun] şeklinde çağırdığında doğru tarihi verecektir.
 
   /* YARDIMCI */
   function yakinIl(lat,lon){
