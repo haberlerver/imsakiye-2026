@@ -103,10 +103,12 @@
     {ad:"TRABZON",lat:41.0,lon:39.73},{ad:"VAN",lat:38.49,lon:43.38}
   ];
 
-  var TE = ["19 Şub","20 Şub","21 Şub","22 Şub","23 Şub","24 Şub","25 Şub",
-    "26 Şub","27 Şub","28 Şub","01 Mar","02 Mar","03 Mar","04 Mar",
-    "05 Mar","06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar",
-    "12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar ⭐","18 Mar","19 Mar"];
+  var TE = [
+    "19 Şub Perşembe", "20 Şub Cuma", "21 Şub Cumartesi", "22 Şub Pazar", "23 Şub Pazartesi", "24 Şub Salı", "25 Şub Çarşamba",
+    "26 Şub Perşembe", "27 Şub Cuma", "28 Şub Cumartesi", "01 Mar Pazar", "02 Mar Pazartesi", "03 Mar Salı", "04 Mar Çarşamba",
+    "05 Mar Perşembe", "06 Mar Cuma", "07 Mar Cumartesi", "08 Mar Pazar", "09 Mar Pazartesi", "10 Mar Salı", "11 Mar Çarşamba",
+    "12 Mar Perşembe", "13 Mar Cuma", "14 Mar Cumartesi", "15 Mar Pazar", "16 Mar Pazartesi", "17 Mar Salı ⭐", "18 Mar Çarşamba", "19 Mar Perşembe"
+];
 
   /* GÜN */
   function gunHesapla() {
