@@ -90,23 +90,19 @@
   };
 
   var SL = [
-    {ad:"ADANA",lat:37,lon:35.32},{ad:"ADIYAMAN",lat:37.76,lon:38.28},
-    {ad:"ANKARA",lat:39.92,lon:32.85},{ad:"ANTALYA",lat:36.9,lon:30.71},
-    {ad:"BURSA",lat:40.18,lon:29.07},{ad:"DİYARBAKIR",lat:37.91,lon:40.23},
-    {ad:"EDİRNE",lat:41.68,lon:26.56},{ad:"ERZURUM",lat:39.9,lon:41.27},
-    {ad:"GAZİANTEP",lat:37.07,lon:37.38},{ad:"HATAY",lat:36.2,lon:36.16},
-    {ad:"İSTANBUL",lat:41.01,lon:28.98},{ad:"İZMİR",lat:38.42,lon:27.13},
-    {ad:"KAYSERİ",lat:38.73,lon:35.48},{ad:"KOCAELİ",lat:40.85,lon:29.88},
-    {ad:"KONYA",lat:37.87,lon:32.48},{ad:"MALATYA",lat:38.36,lon:38.31},
-    {ad:"MERSİN",lat:36.8,lon:34.63},{ad:"SAMSUN",lat:41.29,lon:36.33},
-    {ad:"ŞANLIURFA",lat:37.17,lon:38.79},{ad:"TEKİRDAĞ",lat:40.98,lon:27.51},
-    {ad:"TRABZON",lat:41.0,lon:39.73},{ad:"VAN",lat:38.49,lon:43.38}
-  ];
+{ad:"ADANA",lat:37.00,lon:35.32},{ad:"ADIYAMAN",lat:37.76,lon:38.28},{ad:"AFYONKARAHİSAR",lat:38.75,lon:30.54},{ad:"AĞRI",lat:39.72,lon:43.05},{ad:"AKSARAY",lat:38.37,lon:34.03},{ad:"AMASYA",lat:40.65,lon:35.83},{ad:"ANKARA",lat:39.92,lon:32.85},{ad:"ANTALYA",lat:36.90,lon:30.71},{ad:"ARDAHAN",lat:41.11,lon:42.70},{ad:"ARTVİN",lat:41.18,lon:41.82},{ad:"AYDIN",lat:37.84,lon:27.84},{ad:"BALIKESİR",lat:39.65,lon:27.88},{ad:"BARTIN",lat:41.63,lon:32.34},{ad:"BATMAN",lat:37.89,lon:41.13},{ad:"BAYBURT",lat:40.26,lon:40.23},{ad:"BİLECİK",lat:40.14,lon:29.98},{ad:"BİNGÖL",lat:38.88,lon:40.49},{ad:"BİTLİS",lat:38.40,lon:42.11},{ad:"BOLU",lat:40.73,lon:31.61},{ad:"BURDUR",lat:37.72,lon:30.29},{ad:"BURSA",lat:40.18,lon:29.07},{ad:"ÇANAKKALE",lat:40.15,lon:26.41},{ad:"ÇANKIRI",lat:40.60,lon:33.62},{ad:"ÇORUM",lat:40.55,lon:34.95},{ad:"DENİZLİ",lat:37.77,lon:29.09},{ad:"DİYARBAKIR",lat:37.91,lon:40.23},{ad:"DÜZCE",lat:40.84,lon:31.16},{ad:"EDİRNE",lat:41.68,lon:26.56},{ad:"ELAZIĞ",lat:38.68,lon:39.22},{ad:"ERZİNCAN",lat:39.75,lon:39.49},{ad:"ERZURUM",lat:39.90,lon:41.27},{ad:"ESKİŞEHİR",lat:39.77,lon:30.52},{ad:"GAZİANTEP",lat:37.07,lon:37.38},{ad:"GİRESUN",lat:40.91,lon:38.39},{ad:"GÜMÜŞHANE",lat:40.46,lon:39.48},{ad:"HAKKARİ",lat:37.58,lon:43.74},{ad:"HATAY",lat:36.20,lon:36.16},{ad:"IĞDIR",lat:39.92,lon:44.04},{ad:"ISPARTA",lat:37.76,lon:30.55},{ad:"İSTANBUL",lat:41.01,lon:28.98},{ad:"İZMİR",lat:38.42,lon:27.13},{ad:"KAHRAMANMARAŞ",lat:37.58,lon:36.93},{ad:"KARABÜK",lat:41.20,lon:32.62},{ad:"KARAMAN",lat:37.18,lon:33.22},{ad:"KARS",lat:40.60,lon:43.09},{ad:"KASTAMONU",lat:41.38,lon:33.78},{ad:"KAYSERİ",lat:38.73,lon:35.48},{ad:"KİLİS",lat:36.72,lon:37.12},{ad:"KIRIKKALE",lat:39.84,lon:33.51},{ad:"KIRKLARELİ",lat:41.73,lon:27.22},{ad:"KIRŞEHİR",lat:39.14,lon:34.16},{ad:"KOCAELİ",lat:40.85,lon:29.88},{ad:"KONYA",lat:37.87,lon:32.48},{ad:"KÜTAHYA",lat:39.42,lon:29.98},{ad:"MALATYA",lat:38.36,lon:38.31},{ad:"MANİSA",lat:38.61,lon:27.43},{ad:"MARDİN",lat:37.31,lon:40.74},{ad:"MERSİN",lat:36.81,lon:34.63},{ad:"MUĞLA",lat:37.21,lon:28.36},{ad:"MUŞ",lat:38.73,lon:41.49},{ad:"NEVŞEHİR",lat:38.62,lon:34.71},{ad:"NİĞDE",lat:37.97,lon:34.68},{ad:"ORDU",lat:40.98,lon:37.88},{ad:"OSMANİYE",lat:37.07,lon:36.25},{ad:"RİZE",lat:41.02,lon:40.52},{ad:"SAKARYA",lat:40.77,lon:30.40},{ad:"SAMSUN",lat:41.29,lon:36.33},{ad:"ŞANLIURFA",lat:37.17,lon:38.79},{ad:"SİİRT",lat:37.93,lon:41.94},{ad:"SİNOP",lat:42.03,lon:35.15},{ad:"SİVAS",lat:39.75,lon:37.01},{ad:"ŞIRNAK",lat:37.52,lon:42.45},{ad:"TEKİRDAĞ",lat:40.98,lon:27.51},{ad:"TOKAT",lat:40.32,lon:36.55},{ad:"TRABZON",lat:41.00,lon:39.73},{ad:"TUNCELİ",lat:39.11,lon:39.55},{ad:"UŞAK",lat:38.67,lon:29.41},{ad:"VAN",lat:38.49,lon:43.38},{ad:"YALOVA",lat:40.65,lon:29.27},{ad:"YOZGAT",lat:39.82,lon:34.81},{ad:"ZONGULDAK",lat:41.45,lon:31.79}
+];
 
-  var TE = ["19 Şubat Perşembe 2026", "20 Şubat Cuma 2026", "21 Şubat Cumartesi 2026", "22 Şubat Pazar 2026", "23 Şubat Pazartesi 2026", "24 Şubat Salı 2026", "25 Şubat Çarşamba 2026",
-    "26 Şubat Perşembe 2026", "27 Şubat Cuma 2026", "28 Şubat Cumartesi 2026", "01 Mart Pazar 2026", "02 Mart Pazartesi 2026", "03 Mart Salı 2026", "04 Mart Çarşamba 2026",
-    "05 Mart Perşembe 2026", "06 Mart Cuma 2026", "07 Mart Cumartesi 2026", "08 Mart Pazar 2026", "09 Mart Pazartesi 2026", "10 Mart Salı 2026", "11 Mart Çarşamba 2026",
-    "12 Mart Perşembe 2026", "13 Mart Cuma 2026", "14 Mart Cumartesi 2026", "15 Mart Pazar 2026", "16 Mart Pazartesi 2026", "17 Mart Salı 2026 ⭐", "18 Mart Çarşamba 2026", "19 Mart Perşembe 2026"];
+  var TE = [
+  "19 Şubat 2026 Perşembe", "20 Şubat 2026 Cuma", "21 Şubat 2026 Cumartesi", "22 Şubat 2026 Pazar",
+  "23 Şubat 2026 Pazartesi", "24 Şubat 2026 Salı", "25 Şubat 2026 Çarşamba", "26 Şubat 2026 Perşembe",
+  "27 Şubat 2026 Cuma", "28 Şubat 2026 Cumartesi", "01 Mart 2026 Pazar", "02 Mart 2026 Pazartesi",
+  "03 Mart 2026 Salı", "04 Mart 2026 Çarşamba", "05 Mart 2026 Perşembe", "06 Mart 2026 Cuma",
+  "07 Mart 2026 Cumartesi", "08 Mart 2026 Pazar", "09 Mart 2026 Pazartesi", "10 Mart 2026 Salı",
+  "11 Mart 2026 Çarşamba", "12 Mart 2026 Perşembe", "13 Mart 2026 Cuma", "14 Mart 2026 Cumartesi",
+  "15 Mart 2026 Pazar", "16 Mart 2026 Pazartesi", "17 Mart 2026 Salı ⭐", "18 Mart 2026 Çarşamba",
+  "19 Mart 2026 Perşembe"
+];
 
   function gunHesapla() {
   // Türkiye saati için ayarlama (UTC+3)
