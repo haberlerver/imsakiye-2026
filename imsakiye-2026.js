@@ -1,80 +1,64 @@
 (function () {
 
-  /* CSS */
+  // CSS'i doğrudan head içine en yüksek öncelikle ekliyoruz
   var css = `
     #imsak-portal-root {
-      --ip-bg:#fff;
-      --ip-border:#e4e6eb;
-      --ip-text:#1a1a1a;
-      --ip-text-sec:#65676b;
-      --ip-green:#145a32;
-      --ip-iftar:#eb0000;
-      
-      /* Kaybolmayı engelleyen hayati ayarlar */
       display: block !important;
+      visibility: visible !important;
       width: 100% !important;
-      max-width: 1000px !important; /* Masaüstü genişlik sınırı */
-      margin: 15px auto !important;
-      font-family:'Segoe UI', Tahoma, sans-serif;
-      box-sizing: border-box;
+      max-width: 1100px !important; 
+      margin: 20px auto !important;
+      clear: both !important;
+      float: none !important;
     }
-    
-    body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
-    
     .imsak-widget {
-      background: var(--ip-bg);
-      border: 1px solid var(--ip-border);
+      width: 100% !important;
+      background: #fff;
+      border: 1px solid #e4e6eb;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,.1);
     }
-
-    /* MASAÜSTÜ ÖZEL AYARLARI */
+    /* Masaüstü için genişlik ayarları */
     @media (min-width: 601px) {
-      .imsak-countdown-wrap { padding: 40px 20px !important; }
-      .imsak-countdown-timer { font-size: 60px !important; letter-spacing: 5px !important; }
-      .imsak-vakitler { padding: 20px 10px !important; }
-      .imsak-val { font-size: 18px !important; }
-      .imsak-label { font-size: 11px !important; }
+      .imsak-countdown-timer { font-size: 60px !important; padding: 30px 0 !important; }
+      .imsak-vakitler { padding: 20px !important; }
+      .imsak-val { font-size: 20px !important; }
+      .imsak-label { font-size: 12px !important; }
     }
-
-    /* MOBİL ÖZEL AYARLARI (Senin Orijinal Yapın) */
+    /* Mobil için senin orijinal ayarların */
     @media (max-width: 600px) {
-      #imsak-portal-root { width: 98% !important; }
-      .imsak-countdown-wrap { padding: 15px 10px !important; }
-      .imsak-countdown-timer { font-size: 38px !important; letter-spacing: 2px !important; }
-      .imsak-vakitler { padding: 10px 5px !important; }
-      .imsak-val { font-size: 12px !important; }
+      #imsak-portal-root { max-width: 600px !important; width: 98% !important; }
+      .imsak-countdown-timer { font-size: 38px !important; }
+      .imsak-val { font-size: 13px !important; }
       .imsak-label { font-size: 9px !important; }
     }
-
-    /* ORTAK GÖRSEL STİLLER */
-    .imsak-baslik-serit { background: var(--ip-green); color: #fff; text-align: center; padding: 10px; font-weight: 800; font-size: 14px; letter-spacing: 1px; }
-    .imsak-sehir-bilgi { padding: 8px 15px; background: #f4f4f4; border-bottom: 1px solid var(--ip-border); display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--ip-green); }
-    body.dark .imsak-sehir-bilgi { background: #111827; color: #6ee7a0; }
-    
-    .imsak-countdown-wrap { background: linear-gradient(135deg, #0d3d22, #145a32); text-align: center; }
-    .imsak-countdown-label { color: #a7f3d0; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-    .imsak-countdown-timer { color: #fff; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-    .imsak-countdown-timer .cd-sep { color: #6ee7a0; animation: ib 1s step-start infinite; }
-    @keyframes ib { 50% { opacity: 0; } }
-    
-    .imsak-countdown-sub { color: #6ee7a0; font-size: 11px; margin-top: 10px; font-weight: 600; }
-    .imsak-countdown-iftar { background: linear-gradient(135deg, #7f0000, #b91c1c) !important; }
-    .imsak-countdown-bitti { background: linear-gradient(135deg, #1e3a5f, #1d4ed8) !important; }
-    
-    .imsak-vakitler { display: flex; justify-content: space-between; border-top: 1px solid var(--ip-border); }
-    .imsak-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; border-right: 1px solid var(--ip-border); }
-    .imsak-item:last-child { border-right: none; }
-    .imsak-label { font-weight: 800; color: var(--ip-text-sec); text-transform: uppercase; }
-    .imsak-val { font-weight: 700; color: var(--ip-text); }
-    .imsak-iftar-val { color: var(--ip-iftar) !important; font-size: 1.2em !important; }
-    .imsak-imsak-val { color: var(--ip-green) !important; font-size: 1.2em !important; }
+    /* Diğer sabit stiller */
+    .imsak-baslik-serit { background:#145a32; color:#fff; text-align:center; padding:10px; font-weight:800; }
+    .imsak-sehir-bilgi { padding:10px 15px; background:#f4f4f4; display:flex; justify-content:space-between; font-weight:700; color:#145a32; font-size:12px; }
+    .imsak-countdown-wrap { background:linear-gradient(135deg,#0d3d22,#145a32); text-align:center; color:#fff; }
+    .imsak-countdown-label { color:#a7f3d0; font-size:12px; text-transform:uppercase; margin-bottom:5px; padding-top:15px; }
+    .imsak-countdown-timer { font-weight:900; line-height:1; }
+    .imsak-vakitler { display:flex; justify-content:space-between; background:#fff; border-top:1px solid #e4e6eb; }
+    .imsak-item { flex:1; text-align:center; border-right:1px solid #e4e6eb; padding:10px 0; display:flex; flex-direction:column; gap:5px; }
+    .imsak-item:last-child { border-right:none; }
+    .imsak-label { color:#65676b; text-transform:uppercase; }
+    .imsak-val { color:#1a1a1a; font-weight:700; }
+    body.dark .imsak-widget { background:#1f2937; border-color:#3e4042; }
+    body.dark .imsak-val { color:#e4e6eb; }
+    body.dark .imsak-sehir-bilgi { background:#111827; color:#6ee7a0; border-bottom:1px solid #3e4042; }
   `;
-  
+
   var st = document.createElement('style');
+  st.type = 'text/css';
   st.textContent = css;
   document.head.appendChild(st);
+
+  // Widget'ın ana divini oluştururken stili garantiye alıyoruz
+  var root = document.getElementById('imsak-portal-root');
+  if(root) {
+      root.style.cssText = "display: block !important; width: 100% !important; max-width: 1100px !important; margin: 10px auto !important; visibility: visible !important; opacity: 1 !important;";
+  }
 
 })();
 
