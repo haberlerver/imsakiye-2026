@@ -247,10 +247,16 @@ var gun = gunHesapla();
       timer.innerHTML=fmt(iftar-suAn);
       sub.textContent='İftar vakti: '+v[4];
     } else {
-      wrap.className='imsak-countdown-wrap imsak-countdown-bitti';
-      label.textContent='🌙 Hayırlı İftarlar!';
-      timer.innerHTML='00<span class="cd-sep">:</span>00<span class="cd-sep">:</span>00';
-      sub.textContent='Yarının imsak vakti: '+(D[aktifIl].v[Math.min(aktifGun+1,28)]||v)[0];
+      /* İftar geçti — ertesi günün imsak vaktine say */
+      var sonrakiGun = Math.min(aktifGun + 1, 28);
+      var sonrakiV = D[aktifIl].v[sonrakiGun] || v;
+      var sonrakiImsak = dakika(sonrakiV[0]) * 60;
+      /* Gece yarısını geçip ertesi güne sayıyoruz: 24*3600 - suAn + sonrakiImsak */
+      var kalanSure = 24 * 3600 - suAn + sonrakiImsak;
+      wrap.className='imsak-countdown-wrap';
+      label.textContent='⏳ İmsak Vaktine Kalan';
+      timer.innerHTML=fmt(kalanSure);
+      sub.textContent='Yarının imsak vakti: '+sonrakiV[0];
     }
   }
 
