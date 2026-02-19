@@ -26,7 +26,7 @@
     .imsak-val{font-size:13px;font-weight:700;color:var(--ip-text)}
     .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:14px!important}
     .imsak-imsak-val{color:var(--ip-green)!important;font-size:14px!important}
-    @media(max-width:480px){.imsak-countdown-timer{font-size:30px;letter-spacing:2px}.imsak-label{font-size:8px}.imsak-val{font-size:11px}.imsak-iftar-val,.imsak-imsak-val{font-size:12px!important}}
+    @media(max-width:480px){.imsak-countdown-timer{font-size:30px;letter-spacing:2px}.imsak-label{font-size:8px}.imsak-val{font-size:11px}.imsak-iftar-val,.imsak-imsak-val{font-size:16px!important}}
   `;
   var st = document.createElement('style');
   st.textContent = css;
