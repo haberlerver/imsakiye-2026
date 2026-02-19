@@ -43,8 +43,8 @@
     <div class="imsak-widget">
       <div class="imsak-baslik-serit">🌙 2026 RAMAZAN İMSAKİYESİ</div>
       <div class="imsak-sehir-bilgi">
-        <span>📍 <span id="imsak-sehir-yazi">tespit ediliyor...</span></span>
-        <span id="imsak-tarih-bilgi" style="font-weight:600;color:var(--ip-text-sec)">--</span>
+        <span>📍 <select id="imsak-il-select" class="imsak-select"></select></span>
+        <select id="imsak-tarih-select" class="imsak-select" style="max-width:180px"></select>
       </div>
       <div class="imsak-countdown-wrap" id="imsak-cd-wrap">
         <div class="imsak-countdown-label" id="imsak-cd-label">⏳ Sahur Vakti Bitimine Kalan</div>
@@ -203,23 +203,28 @@ var gun = gunHesapla();
   /* AKTİF İL */
   var aktifIl='İSTANBUL';
 
-  function vakitleriGoster(il){
+  function vakitleriGoster(il, g){
+    if(g===undefined) g=gun;
     var s=D[il]; if(!s){il='İSTANBUL';s=D[il];}
-    var v=s.v[gun]||s.v[0];
+    var v=s.v[g]||s.v[0];
     document.getElementById('im-imsak').textContent=v[0];
     document.getElementById('im-gunes').textContent=v[1];
     document.getElementById('im-ogle').textContent=v[2];
     document.getElementById('im-ikindi').textContent=v[3];
     document.getElementById('im-aksam').textContent=v[4];
     document.getElementById('im-yatsi').textContent=v[5];
-    document.getElementById('imsak-sehir-yazi').textContent=il;
-    document.getElementById('imsak-tarih-bilgi').textContent=TE[gun]||'';
+    // update selects
+    var ilSel=document.getElementById('imsak-il-select');
+    if(ilSel && ilSel.value!==il) ilSel.value=il;
+    var tSel=document.getElementById('imsak-tarih-select');
+    if(tSel && tSel.value!==String(g)) tSel.value=String(g);
     aktifIl=il;
+    aktifGun=g;
   }
 
   function sayacGuncelle(){
     var s=D[aktifIl]; if(!s)return;
-    var v=s.v[gun]||s.v[0];
+    var v=s.v[aktifGun]||s.v[0];
     var imsak=dakika(v[0])*60;
     var iftar=dakika(v[4])*60;
     var now=new Date();
@@ -245,12 +250,48 @@ var gun = gunHesapla();
       wrap.className='imsak-countdown-wrap imsak-countdown-bitti';
       label.textContent='🌙 Hayırlı İftarlar!';
       timer.innerHTML='00<span class="cd-sep">:</span>00<span class="cd-sep">:</span>00';
-      sub.textContent='Yarının imsak vakti: '+(D[aktifIl].v[Math.min(gun+1,28)]||v)[0];
+      sub.textContent='Yarının imsak vakti: '+(D[aktifIl].v[Math.min(aktifGun+1,28)]||v)[0];
     }
   }
 
   /* BAŞLAT */
-  vakitleriGoster('İSTANBUL');
+  var aktifGun = gun;
+
+  // İl select'ini doldur
+  (function(){
+    var ilSel = document.getElementById('imsak-il-select');
+    var iller = Object.keys(D).sort();
+    iller.forEach(function(il){
+      var opt = document.createElement('option');
+      opt.value = il;
+      opt.textContent = il;
+      ilSel.appendChild(opt);
+    });
+    ilSel.value = 'İSTANBUL';
+    ilSel.addEventListener('change', function(){
+      vakitleriGoster(this.value, aktifGun);
+      sayacGuncelle();
+    });
+  })();
+
+  // Tarih select'ini doldur
+  (function(){
+    var tSel = document.getElementById('imsak-tarih-select');
+    TE.forEach(function(tarih, i){
+      var opt = document.createElement('option');
+      opt.value = String(i);
+      opt.textContent = tarih;
+      tSel.appendChild(opt);
+    });
+    tSel.value = String(gun);
+    tSel.addEventListener('change', function(){
+      aktifGun = parseInt(this.value);
+      vakitleriGoster(aktifIl, aktifGun);
+      sayacGuncelle();
+    });
+  })();
+
+  vakitleriGoster('İSTANBUL', gun);
   sayacGuncelle();
   setInterval(sayacGuncelle,1000);
 
@@ -260,7 +301,7 @@ var gun = gunHesapla();
     .then(function(d){
       if(d&&d.latitude&&d.longitude){
         var il=yakinIl(parseFloat(d.latitude),parseFloat(d.longitude));
-        if(D[il]){vakitleriGoster(il);sayacGuncelle();}
+        if(D[il]){vakitleriGoster(il, aktifGun);sayacGuncelle();}
       }
     }).catch(function(){});
 
