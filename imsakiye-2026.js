@@ -1,14 +1,13 @@
 (function () {
 
-  /* 1. CSS STİLLERİ */
+  /* CSS */
   var css = `
     #imsak-portal-root{--ip-bg:#fff;--ip-border:#e4e6eb;--ip-text:#1a1a1a;--ip-text-sec:#65676b;--ip-green:#145a32;--ip-iftar:#eb0000;max-width:600px;margin:10px auto;width:98%;font-family:'Segoe UI',Tahoma,sans-serif}
     body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
     .imsak-widget{background:var(--ip-bg);border:1px solid var(--ip-border);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.1)}
     .imsak-baslik-serit{background:var(--ip-green);color:#fff;text-align:center;padding:8px 12px;font-weight:800;font-size:13px;letter-spacing:1px}
-    .imsak-sehir-bilgi{padding:8px 12px;background:#f4f4f4;border-bottom:1px solid var(--ip-border);display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ip-green)}
+    .imsak-sehir-bilgi{padding:5px 12px;background:#f4f4f4;border-bottom:1px solid var(--ip-border);display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ip-green)}
     body.dark .imsak-sehir-bilgi{background:#111827;color:#6ee7a0}
-    .imsak-select{border:1px solid var(--ip-border);border-radius:4px;padding:2px 5px;font-size:11px;background:#fff;color:#333;outline:none;cursor:pointer;font-weight:bold}
     .imsak-countdown-wrap{background:linear-gradient(135deg,#0d3d22,#145a32);padding:14px 12px 12px;text-align:center;transition:background .5s}
     .imsak-countdown-label{color:#a7f3d0;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
     .imsak-countdown-timer{color:#fff;font-size:42px;font-weight:900;letter-spacing:4px;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 2px 8px rgba(0,0,0,.3)}
@@ -16,6 +15,9 @@
     @keyframes ib{50%{opacity:0}}
     .imsak-countdown-sub{color:#6ee7a0;font-size:10px;margin-top:5px;font-weight:600;letter-spacing:1px}
     .imsak-countdown-iftar{background:linear-gradient(135deg,#7f0000,#b91c1c) !important}
+    .imsak-countdown-iftar .imsak-countdown-label{color:#fca5a5}
+    .imsak-countdown-iftar .imsak-countdown-sub{color:#fca5a5}
+    .imsak-countdown-iftar .imsak-countdown-timer .cd-sep{color:#fca5a5}
     .imsak-countdown-bitti{background:linear-gradient(135deg,#1e3a5f,#1d4ed8) !important}
     .imsak-vakitler{display:flex;justify-content:space-between;padding:10px 8px;border-top:1px solid var(--ip-border)}
     .imsak-item{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border-right:1px solid var(--ip-border);padding:0 4px}
@@ -30,7 +32,7 @@
   st.textContent = css;
   document.head.appendChild(st);
 
-  /* 2. HTML YAPISI */
+  /* HTML */
   var root = document.getElementById('imsak-portal-root');
   if (!root) {
     root = document.createElement('div');
@@ -43,13 +45,13 @@
     <div class="imsak-widget">
       <div class="imsak-baslik-serit">🌙 2026 RAMAZAN İMSAKİYESİ</div>
       <div class="imsak-sehir-bilgi">
-        <span>📍 <select id="imsak-sehir-select" class="imsak-select"></select></span>
+        <span>📍 <span id="imsak-sehir-yazi">tespit ediliyor...</span></span>
         <span id="imsak-tarih-bilgi" style="font-weight:600;color:var(--ip-text-sec)">--</span>
       </div>
       <div class="imsak-countdown-wrap" id="imsak-cd-wrap">
-        <div class="imsak-countdown-label" id="imsak-cd-label">--</div>
-        <div class="imsak-countdown-timer" id="imsak-cd-timer">--:--:--</div>
-        <div class="imsak-countdown-sub" id="imsak-cd-sub">--</div>
+        <div class="imsak-countdown-label" id="imsak-cd-label">⏳ Sahur Vakti Bitimine Kalan</div>
+        <div class="imsak-countdown-timer" id="imsak-cd-timer">--<span class="cd-sep">:</span>--<span class="cd-sep">:</span>--</div>
+        <div class="imsak-countdown-sub" id="imsak-cd-sub">İmsak vakti: --:--</div>
       </div>
       <div class="imsak-vakitler">
         <div class="imsak-item"><span class="imsak-label">İMSAK</span><span class="imsak-val imsak-imsak-val" id="im-imsak">--:--</span></div>
@@ -162,105 +164,106 @@
   "19 Mart 2026 Perşembe"
 ];
 
-  /* 4. MANTIK FONKSİYONLARI */
   function gunHesapla() {
-    var now = new Date();
-    var tr = new Date(now.getTime() + (3 * 60 * 60 * 1000));
-    var bas = new Date(Date.UTC(2026, 1, 19));
-    var bug = new Date(Date.UTC(tr.getUTCFullYear(), tr.getUTCMonth(), tr.getUTCDate()));
-    var g = Math.floor((bug - bas) / 86400000);
-    return Math.min(Math.max(g, 0), 28);
-  }
+  // Türkiye saati için ayarlama (UTC+3)
+  var now = new Date();
+  var tr = new Date(now.getTime() + (3 * 60 * 60 * 1000));
+  
+  // Başlangıç: 19 Şubat 2026 (Ay 1 = Şubat)
+  var bas = new Date(Date.UTC(2026, 1, 19));
+  
+  // Bugünün UTC tarihini al
+  var bug = new Date(Date.UTC(tr.getUTCFullYear(), tr.getUTCMonth(), tr.getUTCDate()));
+  
+  // Milisaniyeyi güne çevir
+  var g = Math.floor((bug - bas) / 86400000);
+  
+  // Dizinin sınırları içinde kal (0 ile 28 arası)
+  return Math.min(Math.max(g, 0), 28);
+}
 
-  var gun = gunHesapla();
-  var aktifIl = 'İSTANBUL';
+var gun = gunHesapla();
+// dizi[gun] şeklinde çağırdığında doğru tarihi verecektir.
 
-  function yakinIl(lat, lon) {
-    var best = 'İSTANBUL', min = Infinity;
-    SL.forEach(function (s) {
-      var d = Math.pow(lat - s.lat, 2) + Math.pow(lon - s.lon, 2);
-      if (d < min) { min = d; best = s.ad; }
+  /* YARDIMCI */
+  function yakinIl(lat,lon){
+    var best='İSTANBUL', min=Infinity;
+    SL.forEach(function(s){
+      var d=Math.pow(lat-s.lat,2)+Math.pow(lon-s.lon,2);
+      if(d<min){min=d;best=s.ad;}
     });
     return best;
   }
-
-  function dakika(str) { var p = str.split(':'); return +p[0] * 60 + +p[1]; }
-
-  function fmt(sn) {
-    sn = Math.max(0, sn);
-    var h = Math.floor(sn / 3600), m = Math.floor((sn % 3600) / 60), s = sn % 60;
-    var p = function (n) { return n < 10 ? '0' + n : n; };
-    return p(h) + '<span class="cd-sep">:</span>' + p(m) + '<span class="cd-sep">:</span>' + p(s);
+  function dakika(str){var p=str.split(':');return +p[0]*60+ +p[1];}
+  function fmt(sn){
+    sn=Math.max(0,sn);
+    var h=Math.floor(sn/3600),m=Math.floor((sn%3600)/60),s=sn%60;
+    var p=function(n){return n<10?'0'+n:n;};
+    return p(h)+'<span class="cd-sep">:</span>'+p(m)+'<span class="cd-sep">:</span>'+p(s);
   }
 
-  function vakitleriGoster(il) {
-    var s = D[il]; if (!s) { il = 'İSTANBUL'; s = D[il]; }
-    var v = s.v[gun] || s.v[0];
-    document.getElementById('im-imsak').textContent = v[0];
-    document.getElementById('im-gunes').textContent = v[1];
-    document.getElementById('im-ogle').textContent = v[2];
-    document.getElementById('im-ikindi').textContent = v[3];
-    document.getElementById('im-aksam').textContent = v[4];
-    document.getElementById('im-yatsi').textContent = v[5];
-    document.getElementById('imsak-tarih-bilgi').textContent = TE[gun] || '';
-    aktifIl = il;
-    document.getElementById('imsak-sehir-select').value = il;
-    sayacGuncelle();
+  /* AKTİF İL */
+  var aktifIl='İSTANBUL';
+
+  function vakitleriGoster(il){
+    var s=D[il]; if(!s){il='İSTANBUL';s=D[il];}
+    var v=s.v[gun]||s.v[0];
+    document.getElementById('im-imsak').textContent=v[0];
+    document.getElementById('im-gunes').textContent=v[1];
+    document.getElementById('im-ogle').textContent=v[2];
+    document.getElementById('im-ikindi').textContent=v[3];
+    document.getElementById('im-aksam').textContent=v[4];
+    document.getElementById('im-yatsi').textContent=v[5];
+    document.getElementById('imsak-sehir-yazi').textContent=il;
+    document.getElementById('imsak-tarih-bilgi').textContent=TE[gun]||'';
+    aktifIl=il;
   }
 
-  function sayacGuncelle() {
-    var s = D[aktifIl]; if (!s) return;
-    var v = s.v[gun] || s.v[0];
-    var imsak = dakika(v[0]) * 60;
-    var iftar = dakika(v[4]) * 60;
-    var now = new Date();
-    var tr = new Date(now.getTime() + 3 * 60 * 60 * 1000);
-    var suAn = tr.getUTCHours() * 3600 + tr.getUTCMinutes() * 60 + tr.getUTCSeconds();
+  function sayacGuncelle(){
+    var s=D[aktifIl]; if(!s)return;
+    var v=s.v[gun]||s.v[0];
+    var imsak=dakika(v[0])*60;
+    var iftar=dakika(v[4])*60;
+    var now=new Date();
+    var tr=new Date(now.getTime()+3*60*60*1000);
+    var suAn=tr.getUTCHours()*3600+tr.getUTCMinutes()*60+tr.getUTCSeconds();
 
-    var wrap = document.getElementById('imsak-cd-wrap');
-    var label = document.getElementById('imsak-cd-label');
-    var timer = document.getElementById('imsak-cd-timer');
-    var sub = document.getElementById('imsak-cd-sub');
+    var wrap =document.getElementById('imsak-cd-wrap');
+    var label=document.getElementById('imsak-cd-label');
+    var timer=document.getElementById('imsak-cd-timer');
+    var sub  =document.getElementById('imsak-cd-sub');
 
-    if (suAn < imsak) {
-      wrap.className = 'imsak-countdown-wrap';
-      label.textContent = '⏳ Sahur Vakti Bitimine Kalan';
-      timer.innerHTML = fmt(imsak - suAn);
-      sub.textContent = 'İmsak vakti: ' + v[0];
-    } else if (suAn < iftar) {
-      wrap.className = 'imsak-countdown-wrap imsak-countdown-iftar';
-      label.textContent = '🌅 İftar Vaktine Kalan';
-      timer.innerHTML = fmt(iftar - suAn);
-      sub.textContent = 'İftar vakti: ' + v[4];
+    if(suAn < imsak){
+      wrap.className='imsak-countdown-wrap';
+      label.textContent='⏳ Sahur Vakti Bitimine Kalan';
+      timer.innerHTML=fmt(imsak-suAn);
+      sub.textContent='İmsak vakti: '+v[0];
+    } else if(suAn < iftar){
+      wrap.className='imsak-countdown-wrap imsak-countdown-iftar';
+      label.textContent='🌅 İftar Vaktine Kalan';
+      timer.innerHTML=fmt(iftar-suAn);
+      sub.textContent='İftar vakti: '+v[4];
     } else {
-      wrap.className = 'imsak-countdown-wrap imsak-countdown-bitti';
-      label.textContent = '🌙 Hayırlı İftarlar!';
-      timer.innerHTML = '00<span class="cd-sep">:</span>00<span class="cd-sep">:</span>00';
-      sub.textContent = 'Yarının imsak vakti: ' + (D[aktifIl].v[Math.min(gun + 1, 28)] || v)[0];
+      wrap.className='imsak-countdown-wrap imsak-countdown-bitti';
+      label.textContent='🌙 Hayırlı İftarlar!';
+      timer.innerHTML='00<span class="cd-sep">:</span>00<span class="cd-sep">:</span>00';
+      sub.textContent='Yarının imsak vakti: '+(D[aktifIl].v[Math.min(gun+1,28)]||v)[0];
     }
   }
 
-  /* 5. SEÇMELİ MENÜYÜ DOLDUR */
-  var select = document.getElementById('imsak-sehir-select');
-  SL.forEach(function (s) {
-    var opt = document.createElement('option');
-    opt.value = s.ad;
-    opt.textContent = s.ad;
-    select.appendChild(opt);
-  });
-  select.onchange = function () { vakitleriGoster(this.value); };
-
-  /* 6. BAŞLAT VE KONUM TESPİTİ */
+  /* BAŞLAT */
   vakitleriGoster('İSTANBUL');
-  setInterval(sayacGuncelle, 1000);
+  sayacGuncelle();
+  setInterval(sayacGuncelle,1000);
 
+  /* KONUM */
   fetch('https://ipapi.co/json/')
-    .then(function (r) { return r.json(); })
-    .then(function (d) {
-      if (d && d.latitude && d.longitude) {
-        var il = yakinIl(parseFloat(d.latitude), parseFloat(d.longitude));
-        if (D[il]) { vakitleriGoster(il); }
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d&&d.latitude&&d.longitude){
+        var il=yakinIl(parseFloat(d.latitude),parseFloat(d.longitude));
+        if(D[il]){vakitleriGoster(il);sayacGuncelle();}
       }
-    }).catch(function () { });
+    }).catch(function(){});
 
 })();
