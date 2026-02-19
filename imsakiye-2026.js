@@ -1,67 +1,37 @@
 (function () {
 
-  /* CSS */
-  var css = `
-    #imsak-portal-root{--ip-bg:#fff;--ip-border:#e4e6eb;--ip-text:#1a1a1a;--ip-text-sec:#65676b;--ip-green:#145a32;--ip-iftar:#eb0000;max-width:600px;margin:10px auto;width:98%;font-family:'Segoe UI',Tahoma,sans-serif}
-    body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
-    .imsak-widget{background:var(--ip-bg);border:1px solid var(--ip-border);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.1)}
-    .imsak-baslik-serit{background:var(--ip-green);color:#fff;text-align:center;padding:8px 12px;font-weight:800;font-size:13px;letter-spacing:1px}
-    .imsak-sehir-bilgi{padding:5px 12px;background:#f4f4f4;border-bottom:1px solid var(--ip-border);display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ip-green)}
-    body.dark .imsak-sehir-bilgi{background:#111827;color:#6ee7a0}
-    .imsak-countdown-wrap{background:linear-gradient(135deg,#0d3d22,#145a32);padding:14px 12px 12px;text-align:center;transition:background .5s}
-    .imsak-countdown-label{color:#a7f3d0;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-    .imsak-countdown-timer{color:#fff;font-size:42px;font-weight:900;letter-spacing:4px;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 2px 8px rgba(0,0,0,.3)}
-    .imsak-countdown-timer .cd-sep{color:#6ee7a0;animation:ib 1s step-start infinite}
-    @keyframes ib{50%{opacity:0}}
-    .imsak-countdown-sub{color:#6ee7a0;font-size:10px;margin-top:5px;font-weight:600;letter-spacing:1px}
-    .imsak-countdown-iftar{background:linear-gradient(135deg,#7f0000,#b91c1c) !important}
-    .imsak-countdown-iftar .imsak-countdown-label{color:#fca5a5}
-    .imsak-countdown-iftar .imsak-countdown-sub{color:#fca5a5}
-    .imsak-countdown-iftar .imsak-countdown-timer .cd-sep{color:#fca5a5}
-    .imsak-countdown-bitti{background:linear-gradient(135deg,#1e3a5f,#1d4ed8) !important}
-    .imsak-vakitler{display:flex;justify-content:space-between;padding:10px 8px;border-top:1px solid var(--ip-border)}
-    .imsak-item{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border-right:1px solid var(--ip-border);padding:0 4px}
-    .imsak-item:last-child{border-right:none}
-    .imsak-label{font-size:9px;font-weight:800;color:var(--ip-text-sec);letter-spacing:.5px}
-    .imsak-val{font-size:13px;font-weight:700;color:var(--ip-text)}
-    .imsak-iftar-val{color:var(--ip-iftar)!important;font-size:14px!important}
-    .imsak-imsak-val{color:var(--ip-green)!important;font-size:14px!important}
-    @media(max-width:480px){.imsak-countdown-timer{font-size:30px;letter-spacing:2px}.imsak-label{font-size:8px}.imsak-val{font-size:11px}.imsak-iftar-val,.imsak-imsak-val{font-size:12px!important}}
-  `;
-  var st = document.createElement('style');
-  st.textContent = css;
-  document.head.appendChild(st);
+/* ================= CSS ================= */
+var css=`
+#imsak-portal-root{--ip-bg:#fff;--ip-border:#e4e6eb;--ip-text:#1a1a1a;--ip-text-sec:#65676b;--ip-green:#145a32;--ip-iftar:#eb0000;max-width:600px;margin:10px auto;width:98%;font-family:'Segoe UI',Tahoma,sans-serif}
+@media(min-width:1024px){#imsak-portal-root{max-width:100%;width:100%}}
+body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
+.imsak-widget{background:var(--ip-bg);border:1px solid var(--ip-border);border-radius:12px;overflow:hidden}
+.imsak-baslik-serit{background:var(--ip-green);color:#fff;text-align:center;padding:8px;font-weight:800}
+.imsak-sehir-bilgi{padding:6px 10px;background:#f4f4f4;display:flex;gap:6px;align-items:center}
+select{font-size:11px;padding:3px;border-radius:4px}
+`;
+document.head.appendChild(Object.assign(document.createElement("style"),{textContent:css}));
 
-  /* HTML */
-  var root = document.getElementById('imsak-portal-root');
-  if (!root) {
-    root = document.createElement('div');
-    root.id = 'imsak-portal-root';
-    var cs = document.currentScript;
-    if (cs) cs.parentNode.insertBefore(root, cs);
-    else document.body.appendChild(root);
-  }
-  root.innerHTML = `
-    <div class="imsak-widget">
-      <div class="imsak-baslik-serit">🌙 2026 RAMAZAN İMSAKİYESİ</div>
-      <div class="imsak-sehir-bilgi">
-        <span>📍 <span id="imsak-sehir-yazi">tespit ediliyor...</span></span>
-        <span id="imsak-tarih-bilgi" style="font-weight:600;color:var(--ip-text-sec)">--</span>
-      </div>
-      <div class="imsak-countdown-wrap" id="imsak-cd-wrap">
-        <div class="imsak-countdown-label" id="imsak-cd-label">⏳ Sahur Vakti Bitimine Kalan</div>
-        <div class="imsak-countdown-timer" id="imsak-cd-timer">--<span class="cd-sep">:</span>--<span class="cd-sep">:</span>--</div>
-        <div class="imsak-countdown-sub" id="imsak-cd-sub">İmsak vakti: --:--</div>
-      </div>
-      <div class="imsak-vakitler">
-        <div class="imsak-item"><span class="imsak-label">İMSAK</span><span class="imsak-val imsak-imsak-val" id="im-imsak">--:--</span></div>
-        <div class="imsak-item"><span class="imsak-label">GÜNEŞ</span><span class="imsak-val" id="im-gunes">--:--</span></div>
-        <div class="imsak-item"><span class="imsak-label">ÖĞLE</span><span class="imsak-val" id="im-ogle">--:--</span></div>
-        <div class="imsak-item"><span class="imsak-label">İKİNDİ</span><span class="imsak-val" id="im-ikindi">--:--</span></div>
-        <div class="imsak-item"><span class="imsak-label">İFTAR</span><span class="imsak-val imsak-iftar-val" id="im-aksam">--:--</span></div>
-        <div class="imsak-item"><span class="imsak-label">YATSI</span><span class="imsak-val" id="im-yatsi">--:--</span></div>
-      </div>
-    </div>`;
+/* ================= HTML ================= */
+var root=document.getElementById("imsak-portal-root")||document.body.appendChild(Object.assign(document.createElement("div"),{id:"imsak-portal-root"}));
+
+root.innerHTML=`
+<div class="imsak-widget">
+  <div class="imsak-baslik-serit">🌙 2026 RAMAZAN İMSAKİYESİ</div>
+  <div class="imsak-sehir-bilgi">
+    <select id="ilSelect"></select>
+    <select id="gunSelect"></select>
+    <span id="imsak-tarih-bilgi"></span>
+  </div>
+  <div class="imsak-vakitler">
+    <span id="im-imsak">--:--</span>
+    <span id="im-gunes">--:--</span>
+    <span id="im-ogle">--:--</span>
+    <span id="im-ikindi">--:--</span>
+    <span id="im-aksam">--:--</span>
+    <span id="im-yatsi">--:--</span>
+  </div>
+</div>`;
 
   /* VERİ */
   var D = {
