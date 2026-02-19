@@ -2,7 +2,7 @@
 
   /* CSS */
   var css = `
-    #imsak-portal-root{--ip-bg:#fff;--ip-border:#e4e6eb;--ip-text:#1a1a1a;--ip-text-sec:#65676b;--ip-green:#145a32;--ip-iftar:#eb0000;max-width:600px;margin:10px auto;width:98%;font-family:'Inter',Tahoma,sans-serif}
+    #imsak-portal-root{--ip-bg:#fff;--ip-border:#e4e6eb;--ip-text:#1a1a1a;--ip-text-sec:#65676b;--ip-green:#145a32;--ip-iftar:#eb0000;max-width:1200px;margin:10px auto;width:98%;font-family:'Inter',Tahoma,sans-serif}
     body.dark #imsak-portal-root{--ip-bg:#1f2937;--ip-border:#3e4042;--ip-text:#e4e6eb;--ip-text-sec:#b0b3b8}
     .imsak-widget{background:var(--ip-bg);border:1px solid var(--ip-border);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.1)}
     .imsak-baslik-serit{background:var(--ip-green);color:#fff;text-align:center;padding:8px 12px;font-weight:800;font-size:13px;letter-spacing:1px}
